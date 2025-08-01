@@ -48,6 +48,12 @@ TEMPLATE = '''
     {% elif row['题型'] == '简答' %}
       <textarea name="q{{ idx }}" rows="3" cols="60"></textarea>
     {% endif %}
+    {% if submitted and row['题型'] != '简答' %}
+      <p style="color:{{ 'green' if row['是否正确'] else 'red' }}">
+        {% if row['是否正确'] %}✔ 回答正确{% else %}❌ 回答错误{% endif %}。
+        正确答案是：<b>{{ row['正确答案'] }}</b>
+      </p>
+    {% endif %}
     <br>
   {% endfor %}
   <input type="submit" value="提交试卷">
@@ -89,24 +95,23 @@ def exam():
             return "<h3>会话已失效，请从<a href='/'>首页</a>重新开始考试。</h3>"
 
         questions = session['questions']
-        score = 0
-        total = 0
-
         for q in questions:
             qid = f"q{q['index']}"
             user_ans = request.form.getlist(qid)
             correct = str(q['正确答案']).strip()
 
+            q['用户答案'] = user_ans
+            q['是否正确'] = False
+
             if q['题型'] in ['单选', '判断']:
                 if user_ans and user_ans[0].strip() == correct:
-                    score += int(q.get('分值', 1))
+                    q['是否正确'] = True
             elif q['题型'] == '多选':
-                if set(map(str.strip, user_ans)) == set(correct):
-                    score += int(q.get('分值', 1))
-            total += int(q.get('分值', 1))
+                correct_set = set(correct)
+                if set(map(str.strip, user_ans)) == correct_set:
+                    q['是否正确'] = True
 
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        return render_template_string(RESULT_TEMPLATE, score=score, total=total, timestamp=timestamp)
+        return render_template_string(TEMPLATE, questions=pd.DataFrame(questions), title=exam_title, submitted=True)
 
     # GET 请求，生成试题
     sampled = pd.DataFrame()
