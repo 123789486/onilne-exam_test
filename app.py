@@ -13,7 +13,8 @@ Session(app)
 
 title_to_df = {
     '默认题库': pd.read_excel("题库.xlsx"),
-    # '题库1': pd.read_excel("题库1.xlsx"),
+    '题库2': pd.read_excel("2.xlsx"),
+    '题库4': pd.read_excel("4.xlsx"),
 }
 
 sample_sizes = {
