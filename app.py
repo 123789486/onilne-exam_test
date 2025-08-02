@@ -19,6 +19,7 @@ title_to_df = {
     '题库6': pd.read_excel("题库6_标准化.xlsx"),
     '题库7': pd.read_excel("题库7_标准化.xlsx"),
     '题库13': pd.read_excel("题库13_标准化.xlsx"),
+    '合并题库': pd.read_excel("合并题库_去除简答.xlsx"),
 
 }
 
@@ -104,10 +105,15 @@ function checkSingleAnswer(el) {
   const correct = el.dataset.correct.trim();
   const container = el.closest('.question');
   const feedback = container.querySelector('.feedback');
-  if (selected === correct) {
+  let mapped = selected;
+  if (selected === '对') mapped = 'A';
+  else if (selected === '错') mapped = 'B';
+
+  if (mapped === correct) {
     feedback.innerHTML = '<span style="color:green">✔ 回答正确！</span>';
   } else {
-    feedback.innerHTML = '<span style="color:red">❌ 回答错误，正确答案是：<b>' + correct + '</b></span>';
+    let correctText = (correct === 'A') ? '对' : (correct === 'B') ? '错' : correct;
+    feedback.innerHTML = '<span style="color:red">❌ 回答错误，正确答案是：<b>' + correctText + '</b></span>';
   }
 }
 
