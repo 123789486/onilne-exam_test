@@ -12,9 +12,9 @@ app.config['SESSION_FILE_DIR'] = os.path.join(os.getcwd(), 'flask_sessions')
 Session(app)
 
 title_to_df = {
-    '默认题库': pd.read_excel("题库.xlsx"),
-    '题库2': pd.read_excel("2.xlsx"),
-    '题库4': pd.read_excel("4.xlsx"),
+    '题库1': pd.read_excel("题库.xlsx"),
+    '题库2': pd.read_excel("题库2_标准化.xlsx"),
+    '题库4': pd.read_excel("题库4_标准化.xlsx"),
 }
 
 sample_sizes = {
@@ -107,7 +107,7 @@ function checkSingleAnswer(el) {
 }
 
 function checkMultiAnswer(qid, correctStr) {
-  const correct = new Set(correctStr.trim().split(''));
+  const correct = new Set(correctStr.replace(/[^A-F]/g, '').split(''));
   const selectedEls = document.querySelectorAll("input[name='" + qid + "']:checked");
   const selected = new Set(Array.from(selectedEls).map(el => el.value));
   const container = selectedEls.length > 0 ? selectedEls[0].closest('.question') : document.querySelector("[name='" + qid + "']").closest('.question');
