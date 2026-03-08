@@ -2,25 +2,26 @@
 import random
 import pandas as pd
 from flask import Flask, render_template_string, request, redirect, url_for, session
-from flask_session import Session
+from flask import Flask, render_template_string, request, redirect, url_for, session
+# from flask_session import Session
 import os
 
 app = Flask(__name__)
 app.secret_key = 'exam_secret_key'
-app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SESSION_FILE_DIR'] = os.path.join(os.getcwd(), 'flask_sessions')
-Session(app)
+# app.config['SESSION_TYPE'] = 'filesystem'
+# app.config['SESSION_FILE_DIR'] = os.path.join(os.getcwd(), 'flask_sessions')
+# Session(app)
 
 title_to_df = {
-    '题库1': pd.read_excel("题库.xlsx"),
+    '题库1': pd.read_excel("题库1_标准化.xlsx"),
     '题库2': pd.read_excel("题库2_标准化.xlsx"),
+    '题库3': pd.read_excel("题库3_标准化.xlsx"),
     '题库4': pd.read_excel("题库4_标准化.xlsx"),
     '题库5': pd.read_excel("题库5_标准化.xlsx"),
     '题库6': pd.read_excel("题库6_标准化.xlsx"),
     '题库7': pd.read_excel("题库7_标准化.xlsx"),
-    '题库13': pd.read_excel("题库13_标准化.xlsx"),
-    '合并题库': pd.read_excel("合并题库_去除简答.xlsx"),
-
+    '题库8': pd.read_excel("题库8_标准化.xlsx"),
+    '合并题库': pd.read_excel("合并题库_标准化.xlsx"),
 }
 
 sample_sizes = {

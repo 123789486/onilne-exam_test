@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+
+# Sessions
+flask_session/
+flask_sessions/
+
+# Data
+# 排除原始题库（如果不想上传的话），但通常建议上传标准化后的
+*.xlsx
+!合并题库_标准化.xlsx
+!题库*_标准化.xlsx
+
+# OS
+.DS_Store
+Thumbs.db
