@@ -35,10 +35,21 @@ HOME_TEMPLATE = '''
 <!doctype html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>选择题库 - 在线考试系统</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; line-height: 1.6; background-color: #f4f7f6; max-width: 600px; margin: 0 auto; }
+    h2 { color: #333; text-align: center; }
+    form { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; flex-direction: column; gap: 15px; }
+    select { padding: 12px; font-size: 16px; border-radius: 5px; border: 1px solid #ddd; }
+    input[type="submit"] { padding: 12px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    input[type="submit"]:hover { background-color: #0056b3; }
+  </style>
 </head>
 <body>
-  <h2>请选择题库开始考试</h2>
+  <h2>在线考试系统</h2>
+  <p style="text-align:center;">请选择题库开始考试</p>
   <form method="post">
     <select name="exam_title">
       {% for title in titles %}
@@ -55,10 +66,19 @@ EXAM_TEMPLATE = '''
 <!doctype html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>在线考试系统</title>
   <style>
-    .feedback { margin-top: 5px; font-weight: bold; }
-    .question { margin-bottom: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 10px; }
+    body { font-family: sans-serif; padding: 15px; line-height: 1.6; background-color: #f4f7f6; max-width: 800px; margin: 0 auto; color: #333; }
+    h2 { text-align: center; color: #007bff; }
+    .feedback { margin-top: 10px; font-weight: bold; padding: 5px; border-radius: 4px; }
+    .question { background: white; margin-bottom: 20px; border-radius: 8px; padding: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    label { display: block; padding: 10px; margin: 5px 0; background: #fafafa; border-radius: 5px; cursor: pointer; border: 1px solid #eee; }
+    label:hover { background: #f0f0f0; }
+    input[type="radio"], input[type="checkbox"] { transform: scale(1.2); margin-right: 10px; }
+    button { display: block; width: 100%; padding: 12px; margin-top: 10px; background: #28a745; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; }
+    textarea { width: 100%; border: 1px solid #ddd; border-radius: 5px; padding: 10px; box-sizing: border-box; }
   </style>
 </head>
 <body>
@@ -79,7 +99,7 @@ EXAM_TEMPLATE = '''
                    data-correct="{{ row['正确答案'] }}"
                    onclick="{% if row['题型']=='单选' %}checkSingleAnswer(this){% endif %}">
             {{ opt }}. {{ row['选项' + opt] }}
-          </label><br>
+          </label>
         {% endif %}
       {% endfor %}
       {% if row['题型'] == '多选' %}
@@ -93,7 +113,7 @@ EXAM_TEMPLATE = '''
                     data-correct="{{ row['正确答案'] }}"
                     onclick="checkSingleAnswer(this)"> 错</label>
     {% elif row['题型'] == '简答' %}
-      <textarea name="q{{ idx }}" rows="3" cols="60"></textarea>
+      <textarea name="q{{ idx }}" rows="3" placeholder="在此输入答案..."></textarea>
     {% endif %}
     <div class="feedback"></div>
     </div>
