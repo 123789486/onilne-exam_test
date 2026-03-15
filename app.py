@@ -15,7 +15,7 @@ app.secret_key = 'exam_secret_key'
 title_to_df = {
     '题库1': pd.read_excel("题库1_标准化.xlsx"),
     '题库2': pd.read_excel("题库2_标准化.xlsx"),
-    '题库3': pd.read_excel("题库3_标准化.xlsx"),
+    # '题库3': pd.read_excel("题库3_标准化.xlsx"),
     '题库4': pd.read_excel("题库4_标准化.xlsx"),
     '题库5': pd.read_excel("题库5_标准化.xlsx"),
     '题库6': pd.read_excel("题库6_标准化.xlsx"),
