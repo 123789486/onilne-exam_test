@@ -13,17 +13,17 @@ app.secret_key = 'exam_secret_key'
 # Session(app)
 
 title_to_df = {
-    '题库1': pd.read_excel("题库1_标准化.xlsx"),
-    '题库2': pd.read_excel("题库2_标准化.xlsx"),
+    # '题库1': pd.read_excel("题库1_标准化.xlsx"),
+    # '题库2': pd.read_excel("题库2_标准化.xlsx"),
     # '题库3': pd.read_excel("题库3_标准化.xlsx"),
-    '题库4': pd.read_excel("题库4_标准化.xlsx"),
-    '题库5': pd.read_excel("题库5_标准化.xlsx"),
-    '题库6': pd.read_excel("题库6_标准化.xlsx"),
-    '题库7': pd.read_excel("题库7_标准化.xlsx"),
+    # '题库4': pd.read_excel("题库4_标准化.xlsx"),
+    # '题库5': pd.read_excel("题库5_标准化.xlsx"),
+    # '题库6': pd.read_excel("题库6_标准化.xlsx"),
+    # '题库7': pd.read_excel("题库7_标准化.xlsx"),
     # '题库8': pd.read_excel("题库8_标准化.xlsx"),
-    '题库13': pd.read_excel("题库13_标准化.xlsx"),
+    # '题库13': pd.read_excel("题库13_标准化.xlsx"),
     '竞赛题库': pd.read_excel("题库_竞赛_标准化.xlsx"),
-    '合并题库': pd.read_excel("合并题库_标准化.xlsx"),
+    # '合并题库': pd.read_excel("合并题库_标准化.xlsx"),
 }
 
 sample_sizes = {
